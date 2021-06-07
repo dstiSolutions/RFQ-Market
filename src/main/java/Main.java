@@ -1,16 +1,15 @@
 
 public class Main {
-    private static Object RFQRunnable;
-    private static Object PricingRunnable;
-
     public static void main(String[] args){
         System.out.println("Starting Program...");
         PriceProcess priceProcess = new PriceProcess();
 
-        Thread rfqThread = new Thread(RFQRunnable);
+        Runnable rfqRunnable = new RFQRunnable();
+        Thread rfqThread = new Thread(rfqRunnable);
         rfqThread.start();
 
-        Thread pricingThread = new Thread(PricingRunnable);
+        Runnable pricingRunnable = new PricingRunnable();
+        Thread pricingThread = new Thread(pricingRunnable);
         pricingThread.start();
 
     }
