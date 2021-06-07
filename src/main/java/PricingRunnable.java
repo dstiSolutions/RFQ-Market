@@ -1,3 +1,4 @@
+
 public class PricingRunnable implements Runnable {
 
         @Override
@@ -9,7 +10,8 @@ public class PricingRunnable implements Runnable {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                //priceProcess
+                double currentPrice = Outer.this.priceProcess.queryPrice();
+                OrderBook currentBook = new OrderBook(currentPrice);
             }
         }
 }

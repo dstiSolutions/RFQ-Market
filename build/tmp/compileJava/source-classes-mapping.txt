@@ -2,9 +2,3 @@ OrderBook.java
  OrderBook
 Main.java
  Main
-PricingThread.java
- PricingThread
-RFQThread.java
- RFQThread
-PriceProcess.java
- PriceProcess
