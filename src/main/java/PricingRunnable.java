@@ -16,7 +16,7 @@ public class PricingRunnable implements Runnable {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                double currentPrice = pProcess.queryPrice();
+                double currentPrice = pProcess.getPrice();
                 oBook = new OrderBook(currentPrice);
             }
         }

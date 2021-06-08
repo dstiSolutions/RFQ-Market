@@ -1,35 +1,26 @@
 import java.util.Random;
+import java.util.Timer;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public class PriceProcess {
     private double price;
+    Timer timer;
 
     PriceProcess() throws InterruptedException {
         System.out.println("Starting Price Process...");
         this.price = 1000;
-        this.update();
+        ScheduledThreadPoolExecutor stpe = new ScheduledThreadPoolExecutor(2);
+        stpe.scheduleAtFixedRate(new UpdateTimeJob(this), 0, 250, TimeUnit.MILLISECONDS);
 
     }
 
-    public void update() throws InterruptedException {
-        while (true){
-            wait(500);
-            updatePrice();
-        }
-    }
-
-    public double updatePrice(){
-        Random rand = new Random();
-        int nextStep = rand.nextInt(3) - 1;
-        if ((price += (double)nextStep) >= 0) {
-            price += (double)nextStep;
-        } else {
-            price = 0.0;
-        }
+    public double getPrice(){
         return price;
     }
 
-    public double queryPrice(){
-        return price;
+    public void setPrice(double newPrice){
+        price = newPrice;
     }
-
 }
+
