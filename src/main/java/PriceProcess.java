@@ -1,11 +1,8 @@
-import java.util.Random;
-import java.util.Timer;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class PriceProcess {
     private double price;
-    Timer timer;
 
     PriceProcess() throws InterruptedException {
         System.out.println("Starting Price Process...");

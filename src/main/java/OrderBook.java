@@ -12,8 +12,8 @@ public class OrderBook {
 
     OrderBook(Double midPrice){
         synchronized (this) {
-            reset();
-            generateOrderBook(midPrice);
+            //reset();
+            generateOrderBook2(midPrice);
         }
     }
 
@@ -38,11 +38,29 @@ public class OrderBook {
         }
     }
 
-    synchronized HashMap<Integer, Integer> getBuyPrices(){
+    public synchronized void generateOrderBook2(Double midPrice){
+        buyPrices.clear();
+        sellPrices.clear();
+        int i = 0;
+        int startSell = (int) Math.ceil(midPrice);
+        while (i < 10){
+            sellPrices.put(100+i*100, i+startSell);
+            i++;
+        }
+
+        int j = 0;
+        int startBuy = (int) Math.floor(midPrice);
+        while (j < 10 && startBuy-j >0){
+            buyPrices.put(100+j*100, startBuy-j);
+            j++;
+        }
+    }
+
+    public synchronized HashMap<Integer, Integer> getBuyPrices(){
         return buyPrices;
     }
 
-    synchronized public HashMap<Integer, Integer> getSellPrices(){
+    public synchronized HashMap<Integer, Integer> getSellPrices(){
         return sellPrices;
     }
 }
