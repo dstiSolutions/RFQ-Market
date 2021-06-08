@@ -8,7 +8,6 @@ class UpdateTimeJob implements Runnable {
     }
 
     public void run() {
-        // your task
         Random rand = new Random();
         int nextStep = rand.nextInt(3) - 1;
         if ((curProcess.getPrice() + (double) nextStep) >= 0) {

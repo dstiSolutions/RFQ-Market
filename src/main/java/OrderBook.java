@@ -8,7 +8,6 @@ public class OrderBook {
         synchronized (this){
             reset();
         }
-
     }
 
     OrderBook(Double midPrice){
@@ -39,11 +38,11 @@ public class OrderBook {
         }
     }
 
-    public HashMap<Integer, Integer> getBuyPrices(){
+    synchronized HashMap<Integer, Integer> getBuyPrices(){
         return buyPrices;
     }
 
-    public HashMap<Integer, Integer> getSellPrices(){
+    synchronized public HashMap<Integer, Integer> getSellPrices(){
         return sellPrices;
     }
 }
