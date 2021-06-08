@@ -5,12 +5,17 @@ public class OrderBook {
     private HashMap<Integer, Integer> sellPrices= new HashMap();
 
     OrderBook(){
-        reset();
+        synchronized (this){
+            reset();
+        }
+
     }
 
     OrderBook(Double midPrice){
-        reset();
-        generateOrderBook(midPrice);
+        synchronized (this) {
+            reset();
+            generateOrderBook(midPrice);
+        }
     }
 
     public void reset(){

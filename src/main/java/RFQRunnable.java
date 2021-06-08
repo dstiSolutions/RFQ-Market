@@ -41,9 +41,17 @@ public class RFQRunnable implements Runnable {
 
         public double sendRequest(int buyOrSell, double quantity) {
             if (buyOrSell == 1) {
-                return oBook.getBuyPrices().get(Math.floor(quantity / 100) * 100);
+                if (oBook.getBuyPrices().get(Math.floor(quantity / 100) * 100) != null) {
+                    return oBook.getBuyPrices().get(Math.floor(quantity / 100) * 100);
+                } else {
+                    return -1;
+                }
             } else if (buyOrSell == -1) {
-                return oBook.getSellPrices().get(Math.floor(quantity / 100) * 100);
+                if (oBook.getSellPrices().get(Math.ceil(quantity / 100) * 100) != null) {
+                    return oBook.getSellPrices().get(Math.ceil(quantity / 100) * 100);
+                } else {
+                    return -1;
+                }
             } else {
                 return -1;
             }
