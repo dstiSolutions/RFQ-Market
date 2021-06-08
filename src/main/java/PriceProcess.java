@@ -9,7 +9,6 @@ public class PriceProcess {
         this.price = 1000;
         ScheduledThreadPoolExecutor stpe = new ScheduledThreadPoolExecutor(2);
         stpe.scheduleAtFixedRate(new UpdateTimeJob(this), 0, 250, TimeUnit.MILLISECONDS);
-
     }
 
     public double getPrice(){

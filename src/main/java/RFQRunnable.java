@@ -16,7 +16,7 @@ public class RFQRunnable implements Runnable {
 
             Random rand = new Random();
             int quantityMaximum = 1000;
-            int numberOfOrders = 30;
+            int numberOfOrders = 50;
 
             int i = 0;
             while (i < numberOfOrders){

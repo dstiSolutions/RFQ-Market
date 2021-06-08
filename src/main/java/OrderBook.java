@@ -9,6 +9,7 @@ public class OrderBook {
     public synchronized void generateOrderBook(Double midPrice){
         buyPrices.clear();
         sellPrices.clear();
+
         int i = 0;
         int startSell = (int) Math.ceil(midPrice);
         while (i < 10){
@@ -18,8 +19,8 @@ public class OrderBook {
 
         int j = 0;
         int startBuy = (int) Math.floor(midPrice);
-        while (j < 10 && startBuy-j >0){
-            buyPrices.put(100+j*100, startBuy-j);
+        while (j < 10 && startBuy-j > 0){
+            buyPrices.put(100-j*100, startBuy-j);
             j++;
         }
     }
