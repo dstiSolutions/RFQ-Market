@@ -1,9 +1,12 @@
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class PricingRunnable implements Runnable {
         private PriceProcess pProcess;
+        private OrderBook oBook;
 
-        PricingRunnable(PriceProcess priceProcess){
+        PricingRunnable(PriceProcess priceProcess, OrderBook orderBook){
             pProcess = priceProcess;
+            oBook = orderBook;
         }
 
         @Override
@@ -16,7 +19,7 @@ public class PricingRunnable implements Runnable {
                     e.printStackTrace();
                 }
                 double currentPrice = pProcess.queryPrice();
-                OrderBook currentBook = new OrderBook(currentPrice);
+                oBook = new OrderBook(currentPrice);
             }
         }
 }
