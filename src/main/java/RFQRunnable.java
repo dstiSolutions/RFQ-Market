@@ -15,19 +15,11 @@ public class RFQRunnable implements Runnable {
             System.out.println("RFQThread started");
 
             Random rand = new Random();
-
-            double curPrice = pProcess.queryPrice();
-            int priceMaxHigh = 1000;
-            int priceMinLow = -1000;
-
-            int quantityMinimum = 0;
             int quantityMaximum = 1000;
-
             int numberOfOrders = 30;
 
             int i = 0;
             while (i < numberOfOrders){
-                int randLimit = rand.nextInt(2001) - 1000 + (int)curPrice;
                 int randQuantity = rand.nextInt(quantityMaximum+1);
                 int randSign = rand.nextInt(3) - 1; // randSign range between [-1,1]
                 int randTime = rand.nextInt(10);
