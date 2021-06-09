@@ -16,10 +16,8 @@ public class RFQRunnable implements Runnable {
 
             Random rand = new Random();
             int quantityMaximum = 1000;
-            int numberOfOrders = 50;
 
-            int i = 0;
-            while (i < numberOfOrders){
+            while(true){
                 int randQuantity = rand.nextInt(quantityMaximum+1);
                 int randSign = rand.nextInt(3) - 1; // randSign range between [-1,1]
                 int randTime = rand.nextInt(10);
@@ -32,12 +30,8 @@ public class RFQRunnable implements Runnable {
                 while (randSign == 0){
                     randSign = rand.nextInt(3) - 1; // check this is wrong
                 }
-
-
                 double response = sendRequest(randSign, randQuantity);
                 Logger.logRFQEvent(randSign, randQuantity, response);
-
-                i++;
             }
         }
 
