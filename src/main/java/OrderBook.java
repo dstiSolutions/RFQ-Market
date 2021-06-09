@@ -9,7 +9,7 @@ public class OrderBook {
 
     OrderBook(){ }
 
-    // Given a midPrice, this function generates an orderbook of prices and quantities to offer
+    // Given a midPrice, this function generates an OrderBook of prices and quantities to offer
     public synchronized void generateOrderBook(Double midPrice){
         buyPrices.clear();
         sellPrices.clear();
@@ -32,10 +32,10 @@ public class OrderBook {
     }
 
     public synchronized HashMap<Integer, Integer> getBuyPrices(){
-        return new HashMap(buyPrices);
+        return new HashMap(buyPrices); //return copy of hashmap for safety
     }
 
     public synchronized HashMap<Integer, Integer> getSellPrices(){
-        return new HashMap(sellPrices);
+        return new HashMap(sellPrices); //same as above
     }
 }

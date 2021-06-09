@@ -3,6 +3,7 @@ import java.util.concurrent.TimeUnit;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Starting Program...");
+
         // Shared PriceProcess and OrderBook
         PriceProcess priceProcess = new PriceProcess();
         OrderBook orderBook = new OrderBook();

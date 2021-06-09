@@ -1,3 +1,4 @@
+
 /* PricingRunnable provides implementation for the thread changing
  * the current mid price.
  */

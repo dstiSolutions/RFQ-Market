@@ -2,7 +2,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /* RFQRunnable provides implementation for the thread querying
- * the bank's OrderBook for the price, given a required quantity.
+ * the company's OrderBook for the price, given a required quantity.
  */
 public class RFQRunnable implements Runnable {
         private PriceProcess pProcess;
@@ -39,7 +39,7 @@ public class RFQRunnable implements Runnable {
             }
         }
 
-        // Function that sends a request to bank's OrderBook
+        // Function that sends a request to company's OrderBook
         public double sendRequest(int buyOrSell, double quantity) {
             if (buyOrSell == 1) {
                 // Grabs price for the quantity, rounded up to nearest 100 to correspond with logic in OrderBook
