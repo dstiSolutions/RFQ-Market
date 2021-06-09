@@ -1,8 +1,8 @@
 import java.util.HashMap;
 
 public class OrderBook {
-    private HashMap<Integer, Integer> buyPrices= new HashMap(); //from quantity to price
-    private HashMap<Integer, Integer> sellPrices= new HashMap();
+    private HashMap<Integer, Integer> buyPrices= new HashMap<>(); //from quantity to price
+    private HashMap<Integer, Integer> sellPrices= new HashMap<>();
 
     OrderBook(){ }
 
@@ -14,6 +14,7 @@ public class OrderBook {
         int startSell = (int) Math.ceil(midPrice);
         while (i < 10){
             sellPrices.put(100+i*100, i+startSell);
+            Logger.logPricing("sell", i+startSell, 100+i*100);
             i++;
         }
 
@@ -21,6 +22,7 @@ public class OrderBook {
         int startBuy = (int) Math.floor(midPrice);
         while (j < 10 && startBuy-j > 0){
             buyPrices.put(100-j*100, startBuy-j);
+            Logger.logPricing("buy", startBuy-j,100-j*100);
             j++;
         }
     }

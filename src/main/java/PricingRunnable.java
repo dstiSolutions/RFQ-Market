@@ -17,6 +17,7 @@ public class PricingRunnable implements Runnable {
                     e.printStackTrace();
                 }
                 double currentPrice = pProcess.getPrice();
+                Logger.logPrices(currentPrice);
                 oBook.generateOrderBook(currentPrice);
             }
         }

@@ -33,7 +33,9 @@ public class RFQRunnable implements Runnable {
                     randSign = rand.nextInt(3) - 1; // check this is wrong
                 }
 
-                sendRequest(randSign, randQuantity);
+
+                double response = sendRequest(randSign, randQuantity);
+                Logger.logRFQEvent(randSign, randQuantity, response);
 
                 i++;
             }
