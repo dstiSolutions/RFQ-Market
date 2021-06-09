@@ -1,5 +1,8 @@
 import java.util.Random;
 
+/* UpdateTimeJob provides implementation for the thread updating
+ * the random price process.
+ */
 class UpdateTimeJob implements Runnable {
     private PriceProcess curProcess;
 
@@ -13,7 +16,7 @@ class UpdateTimeJob implements Runnable {
         if ((curProcess.getPrice() + (double) nextStep) > 0) {
             curProcess.setPrice(curProcess.getPrice() + (double) nextStep);
         } else {
-            curProcess.setPrice(0.0);
+            curProcess.setPrice(0.0); // to stop price going below 0
         }
     }
 }

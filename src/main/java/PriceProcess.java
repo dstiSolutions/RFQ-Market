@@ -1,6 +1,8 @@
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
+/* PriceProcess class generates a random times series to mimic prices for the product.
+ */
 public class PriceProcess {
     private double price;
 

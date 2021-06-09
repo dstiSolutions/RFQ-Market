@@ -3,7 +3,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Instant;
 
-/* Logger Class to log pricing, RFQ, prices events.
+/* Logger Class to log pricing, RFQ, mid price events.
  * Writes currently to a txt file: logfile.txt.
  */
 public class Logger {
@@ -15,8 +15,8 @@ public class Logger {
             Instant time = Instant.now();
             String priceStr = Double.toString(price);
             String quantityStr = Double.toString(quantity);
-
             String now = time.toString();
+
             FileWriter myWriter = new FileWriter("logfile.txt", true); // true appends to original file
 
             myWriter.write("Time: " + now + " , " + "Type: Pricing"+ " , " + "BuyOrSell: " + buyOrSell + " , " + "Price: " + priceStr +  " , " + "Quantity: "+ quantityStr + System.getProperty( "line.separator" ));
@@ -33,14 +33,15 @@ public class Logger {
             String quantityStr = Double.toString(quantity);
             String priceResponse = Double.toString(response);
             String buyOrSell;
+            String now = time.toString();
+
             if (randSign == 1){
                 buyOrSell = "buy";
             } else {
                 buyOrSell = "sell";
             }
 
-            String now = time.toString();
-            FileWriter myWriter = new FileWriter("logfile.txt", true); // true appends to original file
+            FileWriter myWriter = new FileWriter("logfile.txt", true); // appends to original file
 
             myWriter.write("Time: " + now + " , " + "Type: RFQ"+ " , " + "BuyOrSell: " + buyOrSell + " , " + "Quantity: " + quantityStr +  " , " + "Price Response: "+ priceResponse + System.getProperty( "line.separator" ));
             myWriter.close();
@@ -50,12 +51,13 @@ public class Logger {
         }
     }
 
-    public static void logPrices(double price) {
+    public static void logPrices(double midPrice) {
         try{
             Instant time = Instant.now();
-            String midPriceStr = Double.toString(price);
+            String midPriceStr = Double.toString(midPrice);
             String now = time.toString();
-            FileWriter myWriter = new FileWriter("logfile.txt", true); // true appends to original file
+
+            FileWriter myWriter = new FileWriter("logfile.txt", true); //appends to original file
 
             myWriter.write("Time: " + now + " , " + "Type: MidPrice"+ " , " + "Price: " + midPriceStr + System.getProperty( "line.separator" ));
             myWriter.close();

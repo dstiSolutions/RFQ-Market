@@ -1,11 +1,15 @@
 import java.util.HashMap;
 
+/* OrderBook Class to provide a series of prices and quantities offered to clients.
+ * The class is synchronized for concurrency reasons.
+ */
 public class OrderBook {
     private HashMap<Integer, Integer> buyPrices= new HashMap<>(); //from quantity to price
     private HashMap<Integer, Integer> sellPrices= new HashMap<>();
 
     OrderBook(){ }
 
+    // Given a midPrice, this function generates an orderbook of prices and quantities to offer
     public synchronized void generateOrderBook(Double midPrice){
         buyPrices.clear();
         sellPrices.clear();
@@ -14,7 +18,7 @@ public class OrderBook {
         int startSell = (int) Math.ceil(midPrice);
         while (i < 10){
             sellPrices.put(100+i*100, i+startSell);
-            Logger.logPricing("sell", i+startSell, 100+i*100);
+            Logger.logPricing("sell", i+startSell, 100+i*100); //logs different prices and quantities being offered
             i++;
         }
 

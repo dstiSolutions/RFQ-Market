@@ -1,7 +1,9 @@
+import java.util.concurrent.TimeUnit;
 
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Starting Program...");
+        // Shared PriceProcess and OrderBook
         PriceProcess priceProcess = new PriceProcess();
         OrderBook orderBook = new OrderBook();
 
@@ -12,6 +14,5 @@ public class Main {
         Runnable rfqRunnable = new RFQRunnable(priceProcess, orderBook);
         Thread rfqThread = new Thread(rfqRunnable);
         rfqThread.start();
-
     }
 }
