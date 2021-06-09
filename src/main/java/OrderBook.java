@@ -21,8 +21,8 @@ public class OrderBook {
         int j = 0;
         int startBuy = (int) Math.floor(midPrice);
         while (j < 10 && startBuy-j > 0){
-            buyPrices.put(100-j*100, startBuy-j);
-            Logger.logPricing("buy", startBuy-j,100-j*100);
+            buyPrices.put(100+j*100, startBuy-j);
+            Logger.logPricing("buy", startBuy-j,100+j*100);
             j++;
         }
     }
