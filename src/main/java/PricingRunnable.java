@@ -5,17 +5,19 @@
 public class PricingRunnable implements Runnable {
         private PriceProcess pProcess;
         private OrderBook oBook;
+        private boolean exit;
 
         // Inject in the Main's price process and shared OrderBook
         PricingRunnable(PriceProcess priceProcess, OrderBook orderBook){
             pProcess = priceProcess;
             oBook = orderBook;
+            exit = false;
         }
 
         @Override
         public void run(){
             System.out.println("PricingThread started");
-            while (true){
+            while (!exit){
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
@@ -26,4 +28,10 @@ public class PricingRunnable implements Runnable {
                 oBook.generateOrderBook(currentPrice);
             }
         }
+
+        public void stop(){
+            exit = true;
+        }
+
+
 }

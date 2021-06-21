@@ -8,17 +8,23 @@ public class Main {
         PriceProcess priceProcess = new PriceProcess();
         OrderBook orderBook = new OrderBook();
 
-        Runnable fiveMinuteRunnable = new FiveMinuteRunnable();
-        Thread fiveMinuteThread = new Thread(fiveMinuteRunnable);
-        fiveMinuteThread.start();
+        //Runnable fiveMinuteRunnable = new FiveMinuteRunnable();
+        //Thread fiveMinuteThread = new Thread(fiveMinuteRunnable);
+        //fiveMinuteThread.start();
 
-        Runnable pricingRunnable = new PricingRunnable(priceProcess, orderBook);
+        PricingRunnable pricingRunnable = new PricingRunnable(priceProcess, orderBook);
         Thread pricingThread = new Thread(pricingRunnable);
         pricingThread.start();
 
-        Runnable rfqRunnable = new RFQRunnable(priceProcess, orderBook);
+        RFQRunnable rfqRunnable = new RFQRunnable(priceProcess, orderBook);
         Thread rfqThread = new Thread(rfqRunnable);
         rfqThread.start();
+
+        Thread.sleep(200000);
+        pricingRunnable.stop();
+        rfqRunnable.stop();
+        pricingThread.join();
+        rfqThread.join();
     }
 }
 

@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 public class RFQRunnable implements Runnable {
         private PriceProcess pProcess;
         private OrderBook oBook;
+        private boolean exit;
 
         // Inject in the Main's price process and shared OrderBook
         RFQRunnable(PriceProcess priceProcess, OrderBook orderBook){
@@ -21,7 +22,7 @@ public class RFQRunnable implements Runnable {
             Random rand = new Random();
             int quantityMaximum = 1000; // Maximum quantity that can be requested by the client
 
-            while(true){
+            while(!exit){
                 int randQuantity = rand.nextInt(quantityMaximum+1);
                 int randSign = rand.nextInt(3) - 1; // randSign range between [-1,1]
                 int randTime = rand.nextInt(10);
@@ -57,6 +58,10 @@ public class RFQRunnable implements Runnable {
             } else {
                 return -1;
             }
+        }
+
+        public void stop(){
+            exit = true;
         }
 }
 
