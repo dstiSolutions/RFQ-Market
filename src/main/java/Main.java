@@ -8,10 +8,6 @@ public class Main {
         PriceProcess priceProcess = new PriceProcess();
         OrderBook orderBook = new OrderBook();
 
-        //Runnable fiveMinuteRunnable = new FiveMinuteRunnable();
-        //Thread fiveMinuteThread = new Thread(fiveMinuteRunnable);
-        //fiveMinuteThread.start();
-
         PricingRunnable pricingRunnable = new PricingRunnable(priceProcess, orderBook);
         Thread pricingThread = new Thread(pricingRunnable);
         pricingThread.start();
