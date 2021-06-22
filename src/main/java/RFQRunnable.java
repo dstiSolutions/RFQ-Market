@@ -35,13 +35,13 @@ public class RFQRunnable implements Runnable {
                 while (randSign == 0){
                     randSign = rand.nextInt(3) - 1;
                 }
-                double response = sendRequest(randSign, randQuantity);
+                double response = sendRequestForQuote(randSign, randQuantity);
                 Logger.logRFQEvent(randSign, randQuantity, response);
             }
         }
 
         // Function that sends a request to company's OrderBook
-        public double sendRequest(int buyOrSell, double quantity) {
+        public double sendRequestForQuote(int buyOrSell, double quantity) {
             if (buyOrSell == 1) {
                 // Grabs price for the quantity, rounded up to nearest 100 to correspond with logic in OrderBook
                 if (oBook.getBuyPrices().get((int)Math.ceil(quantity / 100) * 100) != null) {

@@ -19,6 +19,7 @@ public class Main {
         Thread.sleep(200000);
         pricingRunnable.stop();
         rfqRunnable.stop();
+        priceProcess.shutDown();
         pricingThread.join();
         rfqThread.join();
     }
