@@ -8,9 +8,9 @@ public class RFQRunnable implements Runnable {
         private PriceProcess pProcess;
         private OrderBook oBook;
         private boolean exit;
-        private enum TradeDirection {BUY, SELL};
+        //private Object IllegalArgumentException;
 
-        // Inject in the Main's price process and shared OrderBook
+    // Inject in the Main's price process and shared OrderBook
         RFQRunnable(PriceProcess priceProcess, OrderBook orderBook){
             oBook = orderBook;
             pProcess = priceProcess;
@@ -24,7 +24,7 @@ public class RFQRunnable implements Runnable {
             int quantityMaximum = 1000; // Maximum quantity that can be requested by the client
 
             while(!exit){
-                int randQuantity = rand.nextInt(quantityMaximum+1);
+                double randQuantity = rand.nextInt(quantityMaximum+1);
                 int randSign = rand.nextInt(3) - 1; // randSign range between [-1,1]
                 int randTime = rand.nextInt(10);
                 try {
@@ -36,20 +36,21 @@ public class RFQRunnable implements Runnable {
                 while (randSign == 0){
                     randSign = rand.nextInt(3) - 1;
                 }
-                TradeDirection tradeDirection;
+
+                String buyOrSell = "";
                 if (randSign == 1){
-                    tradeDirection = TradeDirection.BUY;
-                } else {
-                    tradeDirection = TradeDirection.SELL;
+                    buyOrSell = "BUY";
+                } else if (randSign == -1) {
+                    buyOrSell = "SELL";
                 }
-                double response = sendRequestForQuote(tradeDirection, randQuantity);
-                Logger.logRFQEvent(tradeDirection, randQuantity, response);
+                Double response = sendRequestForQuote(buyOrSell, randQuantity);
+                Logger.logRFQEvent(buyOrSell, randQuantity, response);
             }
         }
 
         // Function that sends a request to company's OrderBook
-        public Double sendRequestForQuote(TradeDirection tradeDirection, double quantity) {
-            if (tradeDirection == TradeDirection.BUY) {
+        public Double sendRequestForQuote(String buyOrSell, double quantity) {
+            if (buyOrSell == "BUY") {
                 // Grabs price for the quantity, rounded up to nearest 100 to correspond with logic in OrderBook
                 Double priceForBuyQuantity = oBook.getBuyPrices().get(Math.ceil(quantity / 100) * 100);
                 if (priceForBuyQuantity != null) {
@@ -57,13 +58,15 @@ public class RFQRunnable implements Runnable {
                 } else {
                     return null; // no price found for that quantity
                 }
-            } else {
+            } else if (buyOrSell == "SELL"){
                 Double priceForSellQuantity = oBook.getSellPrices().get(Math.ceil(quantity / 100) * 100);
                 if (priceForSellQuantity != null) { // similar to above
                     return priceForSellQuantity;
                 } else {
                     return null;
                 }
+            } else {
+                throw new IllegalArgumentException("Neither BUY nor SELL given");
             }
         }
 

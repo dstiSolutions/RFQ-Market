@@ -28,15 +28,15 @@ public class Logger {
         }
     }
 
-    public static void logRFQEvent( tradeDirection, Double quantity, Double response) {
+    public static void logRFQEvent( String buyOrSell, Double quantity, Double response) {
         try{
             Instant time = Instant.now();
             String quantityStr = Double.toString(quantity);
-            String priceResponse = Double.toString(response);
-            String buyOrSell;
+            String priceResponse = "NULL";
+            if (response != null){
+                priceResponse = Double.toString(response);
+            }
             String now = time.toString();
-
-            buyOrSell = tradeDirection.toString();
 
             FileWriter myWriter = new FileWriter("logfile.txt", true); // appends to original file
 
