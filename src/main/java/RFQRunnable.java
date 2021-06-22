@@ -8,6 +8,7 @@ public class RFQRunnable implements Runnable {
         private PriceProcess pProcess;
         private OrderBook oBook;
         private boolean exit;
+        private enum TradeDirection {BUY, SELL};
 
         // Inject in the Main's price process and shared OrderBook
         RFQRunnable(PriceProcess priceProcess, OrderBook orderBook){
@@ -35,28 +36,34 @@ public class RFQRunnable implements Runnable {
                 while (randSign == 0){
                     randSign = rand.nextInt(3) - 1;
                 }
-                double response = sendRequestForQuote(randSign, randQuantity);
-                Logger.logRFQEvent(randSign, randQuantity, response);
+                TradeDirection tradeDirection;
+                if (randSign == 1){
+                    tradeDirection = TradeDirection.BUY;
+                } else {
+                    tradeDirection = TradeDirection.SELL;
+                }
+                double response = sendRequestForQuote(tradeDirection, randQuantity);
+                Logger.logRFQEvent(tradeDirection, randQuantity, response);
             }
         }
 
         // Function that sends a request to company's OrderBook
-        public double sendRequestForQuote(int buyOrSell, double quantity) {
-            if (buyOrSell == 1) {
+        public Double sendRequestForQuote(TradeDirection tradeDirection, double quantity) {
+            if (tradeDirection == TradeDirection.BUY) {
                 // Grabs price for the quantity, rounded up to nearest 100 to correspond with logic in OrderBook
-                if (oBook.getBuyPrices().get((int)Math.ceil(quantity / 100) * 100) != null) {
-                    return oBook.getBuyPrices().get((int)Math.ceil(quantity / 100) * 100);
+                Double priceForBuyQuantity = oBook.getBuyPrices().get(Math.ceil(quantity / 100) * 100);
+                if (priceForBuyQuantity != null) {
+                    return priceForBuyQuantity;
                 } else {
-                    return -1; // error
-                }
-            } else if (buyOrSell == -1) {
-                if (oBook.getSellPrices().get((int)Math.ceil(quantity / 100) * 100) != null) { // similar to above
-                    return oBook.getSellPrices().get((int)Math.ceil(quantity / 100) * 100);
-                } else {
-                    return -1;
+                    return null; // no price found for that quantity
                 }
             } else {
-                return -1;
+                Double priceForSellQuantity = oBook.getSellPrices().get(Math.ceil(quantity / 100) * 100);
+                if (priceForSellQuantity != null) { // similar to above
+                    return priceForSellQuantity;
+                } else {
+                    return null;
+                }
             }
         }
 

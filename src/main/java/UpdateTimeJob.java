@@ -13,7 +13,7 @@ class UpdateTimeJob implements Runnable {
     public void run() {
         Random rand = new Random();
         int nextStep = rand.nextInt(3) - 1;
-        double nextPotentialPrice = curProcess.getPrice() + (double) nextStep);
+        double nextPotentialPrice = curProcess.getPrice() + (double) nextStep;
         curProcess.setPrice(nextPotentialPrice);
     }
 }

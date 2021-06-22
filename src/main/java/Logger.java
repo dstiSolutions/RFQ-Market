@@ -7,10 +7,11 @@ import java.time.Instant;
  * Writes currently to a txt file: logfile.txt.
  */
 public class Logger {
+    private enum TradeDirection {BUY, SELL};
 
     public Logger() throws IOException { }
 
-    public static void logPricing(String buyOrSell, double price, double quantity) {
+    public static void logPricing(String buyOrSell, Double price, Double quantity) {
         try{
             Instant time = Instant.now();
             String priceStr = Double.toString(price);
@@ -27,7 +28,7 @@ public class Logger {
         }
     }
 
-    public static void logRFQEvent(int randSign, double quantity, double response) {
+    public static void logRFQEvent( tradeDirection, Double quantity, Double response) {
         try{
             Instant time = Instant.now();
             String quantityStr = Double.toString(quantity);
@@ -35,11 +36,7 @@ public class Logger {
             String buyOrSell;
             String now = time.toString();
 
-            if (randSign == 1){
-                buyOrSell = "buy";
-            } else {
-                buyOrSell = "sell";
-            }
+            buyOrSell = tradeDirection.toString();
 
             FileWriter myWriter = new FileWriter("logfile.txt", true); // appends to original file
 
