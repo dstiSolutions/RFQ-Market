@@ -23,7 +23,11 @@ public class PriceProcess {
     }
 
     public void setPrice(double newPrice){
-        price = newPrice;
+        if (newPrice>0){
+            price = newPrice;
+        } else {
+            price = 0.0;
+        }
     }
 }
 
